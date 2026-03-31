@@ -1,0 +1,183 @@
+.agregar-container{
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.panel-no-disponible {
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  color: #052659; /* tu color branding */
+  font-weight: bold;
+}
+
+.agregar-form{
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    padding: 5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: 100px;
+}
+
+.title-agregar-trabajo{
+  color: rgb(255, 255, 255);
+}
+
+.panel-admin {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+  min-height: 100vh;
+
+
+}
+.title {
+  color: #ffffff;
+}
+
+
+.admin-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-menu li {
+  margin: 1rem 0;
+}
+
+.admin-menu a {
+  text-decoration: none;
+  color: #052659; /* tu color branding */
+  font-weight: bold;
+}
+
+.admin-menu a:hover {
+  color: #5483b3;
+}
+
+.admin-layout {
+  display: flex;
+  border-radius: 10px;
+  min-height: 100vh;
+  background: #00113f94; /* color base de tu página */
+}
+
+.admin-sidebar {
+  width: 250px;
+  background: rgb(255, 255, 255);
+  border-radius: 0 10px 10px 0;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+.admin-sidebar h2 {
+  color: #052659; /* tu color branding */
+  margin-bottom: 1rem;
+}
+
+.admin-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-sidebar li {
+  margin: 1rem 0;
+}
+
+.admin-sidebar a {
+  text-decoration: none;
+  color: #0c336d;
+  font-weight: bold;
+  padding: 8px 12px;
+  display: block;
+  border-radius: 6px;
+  transition:  0.3s ease;
+}
+
+.admin-sidebar a:hover {
+  background-color: #5483b3; /* hover igual que tu botón Buscar */
+  color: white;
+}
+
+.admin-content {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Contenedor de la sección */
+section {
+  padding: 20px;
+  background-color: #052659; /* negro elegante */
+  border-radius: 8px;
+}
+
+/* Título */
+section h2 {
+  color: #ffffff; /* dorado */
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff; /* gris metálico oscuro */
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+/* Encabezados */
+thead {
+  background: #ffffff;
+}
+
+thead th {
+  color: #052659; /* dorado */
+  padding: 12px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #444;
+}
+
+/* Filas */
+tbody tr {
+  border-bottom: 1px solid #444;
+}
+
+tbody tr:hover {
+  background: #d4d4d4; /* efecto hover */
+}
+
+/* Celdas */
+td {
+  padding: 10px 12px;
+  color: #052659;
+}
+
+/* Botón eliminar */
+button {
+  background: #932424fb; /* dorado */
+  color: #000000; /* contraste negro */
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background: #b50101fb; /* dorado más oscuro */
+}
+
