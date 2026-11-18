@@ -6,20 +6,23 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
+@Table(name = "turnos")
 public class Turno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate fecha;
     private LocalTime hora;
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
-    @ManyToOne
-    @JoinColumn(name = "barbero_id")
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "barbero_id", nullable = false)
     private Barbero barbero;
-    @ManyToOne
-    @JoinColumn(name = "servicio_id")
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "servicio_id", nullable = false)
     private Servicio servicio;
 
     public Turno() {

@@ -1,12 +1,14 @@
 package Barberia_API.Barberia_API.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Entity
+@Table(name = "servicios")
 public class Servicio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +16,28 @@ public class Servicio {
     private String nombre;
     private Double precio;
     private String descripcion;
-    private List<String> imagenes;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
+    @ManyToMany
+    @JoinTable(
+            name = "servicio_caracteristicas",
+            joinColumns = @JoinColumn(name = "servicio_id"),
+            inverseJoinColumns = @JoinColumn(name = "caracteristica_id")
+    )
+    private Set<Caracteristica> caracteristicas = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name = "servicio_imagenes", joinColumns = @JoinColumn(name = "servicio_id"))
+    @Column(name = "imagen")
+    private List<String> imagenes = new ArrayList<>();
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 
     public Servicio() {
     }
@@ -72,5 +95,14 @@ public class Servicio {
 
     public void setImagenes(List<String> imagenes) {
         this.imagenes = imagenes;
+    }
+    public Set<Caracteristica> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(
+            Set<Caracteristica> caracteristicas
+    ) {
+        this.caracteristicas = caracteristicas;
     }
 }

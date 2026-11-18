@@ -1,49 +1,58 @@
 package Barberia_API.Barberia_API.controller;
 
-
-import Barberia_API.Barberia_API.entity.Cliente;
+import Barberia_API.Barberia_API.dto.ClienteDTO;
 import Barberia_API.Barberia_API.service.ClienteService;
-import Barberia_API.Barberia_API.service.ServicioService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("/clientes")
 public class ClienteController {
 
-    @Autowired
-    private ClienteService clienteService;
+    private final ClienteService clienteService;
+
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
     @GetMapping
-    public List<Cliente> findAll(){
-        return clienteService.findAll();
+    public ResponseEntity<List<ClienteDTO>> findAll() {
+        return ResponseEntity.ok(clienteService.findAll());
     }
 
     @GetMapping("/{id}")
-    public Cliente findById(@PathVariable Long id){
-        return clienteService.findById(id);
+    public ResponseEntity<ClienteDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(clienteService.findById(id));
     }
 
     @PostMapping
-    public Cliente save(@RequestBody Cliente cliente){
-        return clienteService.save(cliente);
+    public ResponseEntity<ClienteDTO> save(
+            @Valid @RequestBody ClienteDTO cliente) {
+
+        return ResponseEntity.ok(clienteService.save(cliente));
     }
 
     @PutMapping("/{id}")
-    public Cliente update(@PathVariable Long id, @RequestBody Cliente cliente){
-        return clienteService.update(id, cliente);
+    public ResponseEntity<ClienteDTO> update(
+            @PathVariable Long id,
+            @Valid @RequestBody ClienteDTO cliente) {
+
+        return ResponseEntity.ok(clienteService.update(id, cliente));
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         clienteService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/buscar")
-    public Cliente findByName(@RequestParam String nombre){
-        return clienteService.findByName(nombre);
+    public ResponseEntity<ClienteDTO> findByName(
+            @RequestParam String nombre) {
+
+        return ResponseEntity.ok(clienteService.findByName(nombre));
     }
 }
-

@@ -1,16 +1,15 @@
 package Barberia_API.Barberia_API.service;
 
-import Barberia_API.Barberia_API.entity.Servicio;
-import Barberia_API.Barberia_API.entity.Cliente;
+import Barberia_API.Barberia_API.dto.ServicioDTO;
 
 import java.util.List;
 
 public interface ServicioService {
-    List<Servicio> findAll();
-    Servicio findById(Long id);
-    Servicio findByNombre(String nombre);
-    Servicio save(Servicio servicio);
-    Servicio update(Long id, Servicio servicio);
+    List<ServicioDTO> findAll();
+    ServicioDTO findById(Long id);
+    ServicioDTO findByNombre(String nombre);
+    ServicioDTO save(ServicioDTO servicio);
+    ServicioDTO update(Long id, ServicioDTO servicio);
     void delete(Long id);
 }
 

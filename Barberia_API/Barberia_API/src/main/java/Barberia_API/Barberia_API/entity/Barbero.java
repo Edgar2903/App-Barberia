@@ -1,12 +1,12 @@
 package Barberia_API.Barberia_API.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
+
 @Entity
+@Table(name = "barberos")
 public class Barbero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,11 @@ public class Barbero {
     private String apellido;
     private String especialidad;
     private Double valoracion;
-    private List<String> imagenes;
+
+    @ElementCollection
+    @CollectionTable(name = "barbero_imagenes", joinColumns = @JoinColumn(name = "barbero_id"))
+    @Column(name = "imagen")
+    private List<String> imagenes = new ArrayList<>();
 
     public Barbero() {
     }

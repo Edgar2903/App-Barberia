@@ -1,58 +1,61 @@
 package Barberia_API.Barberia_API.controller;
 
-
-import Barberia_API.Barberia_API.entity.Servicio;
+import Barberia_API.Barberia_API.dto.ServicioDTO;
+import Barberia_API.Barberia_API.service.impl.AutorizacionService;
 import Barberia_API.Barberia_API.service.ServicioService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/servicios")
 public class ServicioController {
 
-    @Autowired
-    private ServicioService servicioService;
+    private final ServicioService servicioService;
+    private final AutorizacionService autorizacionService;
+
+    public ServicioController(ServicioService servicioService, AutorizacionService autorizacionService) {
+        this.servicioService = servicioService;
+        this.autorizacionService = autorizacionService;
+    }
 
     @GetMapping
-    public List<Servicio> findAll(){
-        return servicioService.findAll();
+    public ResponseEntity<List<ServicioDTO>> findAll() {
+        return ResponseEntity.ok(servicioService.findAll());
     }
 
     @GetMapping("/{id}")
-    public Servicio findById(@PathVariable Long id){
-        return servicioService.findById(id);
+    public ResponseEntity<ServicioDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(servicioService.findById(id));
     }
 
     @GetMapping("/buscar")
-    public Servicio findByNombre(@RequestParam String nombre){
-        return servicioService.findByNombre(nombre);
+    public ResponseEntity<ServicioDTO> findByNombre(@RequestParam String nombre) {
+        return ResponseEntity.ok(servicioService.findByNombre(nombre));
     }
-
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Servicio servicio) {
-        try {
-            Servicio nuevo = servicioService.save(servicio);
-            return ResponseEntity.ok(nuevo);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body(Map.of("error", e.getMessage()));
-        }
+    public ResponseEntity<ServicioDTO> save(
+            @Valid @RequestBody ServicioDTO servicioDTO,
+            HttpSession session
+    ) {
+        autorizacionService.verificarAdministrador(session);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(servicioService.save(servicioDTO));
     }
-
-
-    @PutMapping
-    public Servicio update(@PathVariable Long id, @RequestBody Servicio servicio){
-        return servicioService.update(id, servicio);
+    @PutMapping("/{id}")
+    public ResponseEntity<ServicioDTO> update(@PathVariable Long id, @Valid @RequestBody ServicioDTO servicio, HttpSession session) {
+        return ResponseEntity.ok(servicioService.update(id, servicio));
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id, HttpSession session) {
         servicioService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

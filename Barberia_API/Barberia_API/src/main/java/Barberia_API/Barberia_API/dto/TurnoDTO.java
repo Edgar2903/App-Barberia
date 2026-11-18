@@ -1,16 +1,36 @@
 package Barberia_API.Barberia_API.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class TurnoDTO {
 
+    private Long id;
+
+    @NotNull(message = "La fecha es obligatoria")
     private LocalDate fecha;
+
+    @NotNull(message = "La hora es obligatoria")
     private LocalTime hora;
 
+    @NotNull(message = "El cliente es obligatorio")
     private Long clienteId;
+
+    @NotNull(message = "El barbero es obligatorio")
     private Long barberoId;
+
+    @NotNull(message = "El servicio es obligatorio")
     private Long servicioId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public LocalDate getFecha() {
         return fecha;
